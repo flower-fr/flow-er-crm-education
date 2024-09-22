@@ -1,0 +1,124 @@
+{  	
+    "headerParams": {
+        "darkMode": true,
+        "logo": "logo-studency.jpg",
+        "logoHeight": "50"
+    },
+
+    "applications": {
+		"admission": {
+			"labels": { "default": "Admission" },
+			"default": "prospect",
+			"defaultRole": "sales_manager"
+        },
+		"marketing": {
+			"labels": { "default": "Marketing" },
+			"default": "automation_template"
+        },
+		"admin": {
+			"labels": { "default": "Admin" },
+			"default": "profile"
+        }
+    },
+
+    "menu/admission": {
+        "tabs": ["tab/prospect", "tab/commercial", "tab/event", "tab/configView"],
+        "defaultTab": "tab/prospect",
+        "labels": { "default": "Admission" }
+    },
+
+    "tab/prospect": {
+        "menu": "menu/admission",
+        "route": "/bo/index/candidat",
+        "urlParams": "view=prospect",
+        "labels": { "default": "Prospects" }
+    },
+
+    "tab/commercial": {
+        "menu": "menu/admission",
+        "route": "/bo/index/candidat",
+        "urlParams": "view=marketing",
+        "labels": { "default": "Candidats" }
+    },
+
+    "tab/event": {
+        "menu": "menu/admission",
+        "route": "/bo/index/event",
+        "urlParams": "view=event",
+        "labels": { "default": "Calendrier" }
+    },
+
+    "tab/configView": {
+        "menu": "menu/admission",
+        "route": "/bo/index/config",
+        "urlParams": "view=configView",
+        "labels": { "default": "Views", "fr_FR": "Vues" }
+    },
+
+    "tab/candidatAudit": {
+        "menu": "menu/admin",
+        "route": "/bo/index/audit",
+        "urlParams": "view=auditCandidat",
+        "labels": { "default": "Audit candidats" }
+    },
+
+    "menu/bi": {
+        "tabs": ["tab/auditStatus", "tab/auditOrigine"],
+        "defaultTab": "tab/auditStatus",
+        "labels": { "default": "BI" }
+    },
+
+    "tab/auditStatus": {
+        "menu": "menu/bi",
+        "route": "/mdb/index/audit",
+        "urlParams": "view=auditStatus",
+        "labels": { "default": "Actions commerciales 2024" }
+    },
+
+    "tab/auditOrigine": {
+        "menu": "menu/bi",
+        "route": "/mdb/index/audit",
+        "urlParams": "view=auditOrigine",
+        "labels": { "default": "Suivi par origine (à faire)" }
+    },
+
+    "menu/marketing": {
+        "tabs": ["tab/automationTemplate", "tab/campaign"],
+        "defaultTab": "tab/automationTemplate",
+        "labels": { "default": "Marketing" }
+    },
+
+    "tab/automationTemplate": {
+        "menu": "menu/marketing",
+        "route": "/mdb/index/document_automation_template",
+        "urlParams": "view=automationTemplate",
+        "labels": { "default": "Automation templates" }
+    },
+
+    "tab/campaign": {
+        "menu": "menu/marketing",
+        "route": "/mdb/index/mkt_targeted",
+        "urlParams": "view=campaign",
+        "labels": { "default": "Campagnes" }
+    },
+
+    "menu/apprentissage": {
+        "tabs": ["tab/appEntreprise", "tab/appEvaluation"],
+        "defaultTab": "tab/appEntreprise",
+        "labels": { "default": "Apprentissage" }
+    },
+
+    "tab/appEntreprise": {
+        "menu": "menu/apprentissage",
+        "route": "/mdb/index/entreprise",
+        "urlParams": "view=appEntreprise",
+        "labels": { "default": "Entreprises" }
+    },
+
+    "tab/appEvaluation": {
+        "menu": "menu/apprentissage",
+        "route": "/mdb/index/document_apprentissage",
+        "urlParams": "view=appEvaluation",
+        "labels": { "default": "Évaluations tuteurs" }
+    }
+}

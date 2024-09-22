@@ -1,0 +1,402 @@
+{
+    "mkt_targeted/model": {
+        "entities": {
+            "candidat": { "table": "candidat", "foreignKey": "candidat_id", "foreignEntity": "mkt_targeted" },
+            "place": { "table": "place", "foreignKey": "place_id", "foreignEntity": "candidat" },
+            "contact_1": { "table": "vcard", "foreignKey": "contact_1_id", "foreignEntity": "candidat" }
+        },
+        "properties": {
+            "id": { "entity": "mkt_targeted", "column": "id", "type": "primary" },
+            "year": { "entity": "mkt_targeted", "column": "year" },
+            "month": { "entity": "mkt_targeted", "column": "month" },
+
+            "candidat_id": { "entity": "mkt_targeted", "column": "candidat_id", "type": "int" },
+            "status": { "entity": "mkt_targeted", "column": "status" },
+            "target": { "entity": "mkt_targeted", "column": "target" },
+            "sent_at": { "entity": "mkt_targeted", "column": "sent_at", "type": "datetime" },
+            "email_subject": { "entity": "mkt_targeted", "column": "email_subject" },
+            "email_text": { "entity": "mkt_targeted", "column": "email_text", "type": "mediumtext" },
+            "sms_text": { "entity": "mkt_targeted", "column": "sms_text" },
+
+            "school": { "entity": "candidat", "column": "school" },
+            "place_id": { "entity": "candidat", "column": "place_id", "type": "int" },
+            "place_name": { "entity": "place", "column": "name" },
+            "school_year": { "entity": "candidat", "column": "school_year" },
+            "level": { "entity": "candidat", "column": "level" },
+            "origine": { "entity": "candidat", "column": "origine" },
+            "amount": { "entity": "candidat", "column": "amount", "type": "float" },
+            "boarding_school": { "entity": "candidat", "column": "boarding_school" },
+            "identifier": { "entity": "candidat", "column": "identifier" },
+            "contact_1_id": { "entity": "candidat", "column": "contact_1_id", "type": "int" },
+            "n_first": { "entity": "contact_1", "column": "n_first" },
+            "n_last": { "entity": "contact_1", "column": "n_last" },
+            "n_fn": { "entity": "contact_1", "column": "n_fn", "type": "CONCAT", "components": ["n_last", " ", "n_first"] },
+            "email": { "entity": "contact_1", "column": "email" },
+            "tel_cell": { "entity": "contact_1", "column": "tel_cell" },
+
+            "visibility": { "entity": "mkt_targeted", "column": "visibility" },
+            "touched_at": { "entity": "mkt_targeted", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "mkt_targeted", "column": "touched_by", "type": "int" }
+       }
+    },
+
+    "mkt_targeted/property/status": {
+		"definition": "inline",
+        "type": "select",
+		"modalities": {
+            "scheduled": { "default": "Scheduled", "fr_FR": "Planifié" },
+            "sent": { "default": "Sent", "fr_FR": "Envoyé" },
+            "open": { "default": "Open", "fr_FR": "Ouvert" },
+            "unsubscribed": { "default": "Unsubscribed", "fr_FR": "Désinscrit" },
+            "invalid": { "default": "Invalid", "fr_FR": "Invalide" }
+        },
+		"labels": {
+			"default": "Status",
+			"fr_FR": "Statut"
+		}
+    },
+
+    "mkt_targeted/property/target": {
+		"definition": "inline",
+        "type": "input",
+		"labels": {
+			"default": "Target",
+			"fr_FR": "Cible"
+		}
+    },
+
+    "mkt_targeted/property/sent_at": {
+		"definition": "inline",
+        "type": "datetime",
+		"labels": {
+			"default": "Sent at",
+			"fr_FR": "Envoyé le"
+		}
+    },
+
+    "mkt_targeted/property/email_subject": {
+		"definition": "inline",
+        "type": "input",
+		"labels": {
+			"default": "Email subject",
+			"fr_FR": "Objet du mail"
+		}
+    },
+
+    "mkt_targeted/property/email_text": {
+		"definition": "inline",
+        "type": "html",
+		"labels": {
+			"default": "Email text",
+			"fr_FR": "Texte du mail"
+		}
+    },
+
+    "mkt_targeted/property/sms_text": {
+		"definition": "inline",
+        "type": "html",
+		"labels": {
+			"default": "SMS text",
+			"fr_FR": "Texte du SMS"
+		}
+    },
+
+    "mkt_targeted/property/year": {
+		"definition": "inline",
+        "type": "select",
+		"modalities": {
+            "2023": { "default": "2023" },
+            "2024": { "default": "2024" }
+        },
+		"labels": {
+			"default": "Year",
+			"fr_FR": "Année"
+		}
+    },
+
+    "mkt_targeted/property/school": { 
+        "definition": "inline",
+        "type": "select",
+		"modalities": {
+            "bts_mco": { "default": "BTS MCO - Management Commercial Opérationnel" },
+            "bts_ndrc": { "default": "BTS NDRC - Négociation et Digitalisation de la Relation Client" },
+            "bts_gpme": { "default": "BTS GPME - Gestion de la PME" },
+            "bts_com": { "default": "BTS COM - Communication" },
+            "dcg": { "default": "DCG - Diplôme de Comptabilité et Gestion" },
+            "bachelor_business_development": { "default": "Bachelor Business Development" },
+            "bachelor_marketing_com": { "default": "Bachelor Marketing et Communication" },
+            "bachelor_rh": { "default": "Bachelor Ressources Humaines" },
+            "mastere_business_management": { "default": "Mastère Business Management" },
+            "mastere_marketing_com": { "default": "Mastère Marketing et Communication" },
+            "mastere_rh": { "default": "Mastère Ressources Humaines" },
+            "mastere_juriste": { "default": "Mastère Juriste" }
+		},
+		"labels": {
+			"default": "Formation"
+		}
+    },
+
+    "mkt_targeted/property/place_id": {
+		"definition": "inline",
+		"type": "source",
+        "entity": "place",
+        "where": "status:new",
+        "order": "name",
+        "format": ["%s", "name"],
+		"labels": {
+			"default": "Place",
+			"fr_FR": "Campus"
+		}
+    },
+
+    "mkt_targeted/property/place_name": {
+		"definition": "inline",
+		"type": "input",
+		"labels": {
+			"default": "Place",
+			"fr_FR": "Campus"
+		}
+    },
+
+    "mkt_targeted/property/school_year": { 
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "2023-2024": { "default": "2023-2024" },
+            "2024-2025": { "default": "2024-2025" },
+            "2025-2026": { "default": "2025-2026" },
+            "2026-2027": { "default": "2026-2027" },
+            "2027-2028": { "default": "2027-2028" }
+        },
+		"labels": {
+			"default": "School year",
+			"fr_FR": "Année scolaire"
+		}
+    },
+
+    "mkt_targeted/property/level": { 
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "bts_1": { "fr_FR": "BTS 1" },
+            "bts_2": { "fr_FR": "BTS 2" },
+            "b1": { "fr_FR": "Bachelor 1" },
+            "b2": { "fr_FR": "Bachelor 2" },
+            "b3": { "fr_FR": "Bachelor 3" },
+            "m1": { "fr_FR": "Mastère 1" },
+            "m2": { "fr_FR": "Mastère 2" }
+        },
+        "labels": {
+            "default": "Niveau à intégrer"
+        }
+    },
+
+    "mkt_targeted/property/origine": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+                "web": { "default": "Web site", "fr_FR": "Site web" },
+                "incoming": { "default": "Incoming call", "fr_FR": "Appel entrant" },
+                "jpo": { "default": "Journée Porte Ouverte" },
+                "salon": { "default": "Salon" },
+                "facebook": { "default": "Facebook Ads" },
+                "google": { "default": "Google Ads" },
+                "tiktok": { "default": "Tiktok Ads" },
+                "file": { "default": "File", "fr_FR": "Fichier" }
+        },
+        "labels": {
+                "default": "Origine",
+                "fr_FR": "Origine"
+        }
+    },
+    
+    "mkt_targeted/property/amount": {
+        "definition": "inline",
+        "type": "number",
+        "labels": {
+            "default": "Number",
+            "fr_FR": "Nombre"
+        }
+    },
+
+    "mkt_targeted/property/boarding_school": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "externe": { "default": "Externe" },
+            "demi": { "default": "Demi-pensionnaire" },
+            "interne": { "default": "Internat" },
+            "weekend": { "default": "Internat + WE" }
+        },
+        "labels": {
+            "default": "Boarding-school",
+            "fr_FR": "Régime"
+        }
+    },
+
+    "mkt_targeted/property/identifier": {
+		"definition": "inline",
+		"type": "input",
+		"labels": {
+			"default": "Identifier",
+			"fr_FR": "Identifiant"
+		}
+    },
+    
+    "mkt_targeted/property/contact_1_id": {
+		"definition": "inline",
+		"type": "photo",
+		"labels": {
+			"default": "",
+			"fr_FR": ""
+		}
+    },
+
+    "mkt_targeted/property/n_first": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "First name",
+            "fr_FR": "Prénom"
+        }
+    },
+
+    "mkt_targeted/property/n_last": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Last name",
+            "fr_FR": "Nom"
+        }
+    },
+
+    "mkt_targeted/property/n_fn": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Name",
+            "fr_FR": "Nom"
+        }
+    },
+
+    "mkt_targeted/property/email": {
+        "definition": "inline",
+        "type": "email",
+        "labels": {
+            "default": "Email",
+            "fr_FR": "Email"
+        }
+    },
+
+    "mkt_targeted/property/tel_cell": {
+        "definition": "inline",
+        "type": "phone",
+        "labels": {
+            "default": "Cellular",
+            "fr_FR": "Mobile"
+        }
+    },
+
+    "mkt_targeted/property/touched_at": {
+        "definition": "inline",
+        "type": "datetime",
+        "labels": {
+            "default": "Creation time",
+            "fr_FR": "Création"
+        }
+    },
+    	
+	"mkt_targeted/index/campaign": {
+        "bodyRenderer": "renderBody10",
+        "searchRenderer": "renderSearch",
+        "listRenderer": "renderTable"
+    }, 
+
+	"mkt_targeted/search/default": { 
+        "view": "renderSearchB5",
+        "properties": { 
+            "target": { "completion": true },
+            "status": {},
+            "sent_at": {},
+            "school": { "multiple": true },
+            "place_id": { "multiple": true },
+            "school_year": { "multiple": true },
+            "level": { "multiple": true },
+            "n_fn": {},
+            "email": {},
+            "tel_cell": {},
+            "origine": { "multiple": true }
+        }
+    },
+	
+	"mkt_targeted/list/default": { 
+        "key": ["value", "school", "school_year", "level"],
+        "measure": "amount",
+        "properties": { 
+            "target": { "completion": true },
+            "status": {},
+            "sent_at": {},
+            "school_year": {},
+            "level": {},
+            "n_fn": {},
+            "email": {},
+            "tel_cell": {},
+            "origine": {}
+        }
+    },
+
+    "mkt_targeted/detail/default": {
+        "tabs": {
+            "detail": {
+                "definition": "inline",
+                "route": "/bo/update/mkt_targeted",
+                "labels": {"en_US": "Detail", "fr_FR": "Détail"},
+                "key": "id"
+            }
+        }
+    },
+
+	"mkt_targeted/update/default": {
+        "layout": {
+            "unique": {
+                "properties": ["target", "sent_at", "email_subject", "email_text", "sms_text"]
+            }
+        },
+        "properties": {
+            "target": { "readonly": true },
+            "status": { "readonly": true },
+            "sent_at": { "readonly": true },
+            "email_subject": { "readonly": true },
+            "email_text": { "readonly": true },
+            "sms_text": { "readonly": true },
+            "school": { "readonly": true },
+            "place_id": { "readonly": true },
+            "school_year": { "readonly": true },
+            "level": { "readonly": true },
+            "n_fn": { "readonly": true },
+            "email": { "readonly": true },
+            "tel_cell": { "readonly": true },
+            "origine": { "readonly": true }
+        }
+    },
+
+    "mkt_targeted/export/default": { 
+        "properties": { 
+            "touched_at": {},
+            "target": {},
+            "status": {},
+            "sent_at": {},
+            "email_subject": {},
+            "email_text": {},
+            "sms_text": {},
+            "school": {},
+            "place_id": {},
+            "school_year": {},
+            "level": {},
+            "n_fn": {},
+            "email": {},
+            "tel_cell": {},
+            "origine": {}
+        }
+    }
+}

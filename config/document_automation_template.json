@@ -1,0 +1,110 @@
+{
+    "document_automation_template/model": {
+        "entities": {
+        },
+        "properties": {
+            "id": { "entity": "document_automation_template", "column": "id", "type": "primary" },
+            "type": { "entity": "document_automation_template", "column": "type" },
+            "name": { "entity": "document_automation_template", "column": "name" },
+            "mime": { "entity": "document_automation_template", "column": "mime" },
+            "version": { "entity": "document_automation_template", "column": "version", "type": "smallint" },
+            "content_vector": { "entity": "document_automation_template", "column": "content_vector", "type": "mediumtext" },
+
+            "visibility": { "entity": "document_automation_template", "column": "visibility", "audit": true },
+            "touched_at": { "entity": "document_automation_template", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "document_automation_template", "column": "touched_by", "type": "int" }
+       }
+    },
+	
+    "document_automation_template/property/type": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "text": { "default": "text", "fr_FR": "Texte" },
+            "binay": { "default": "binary", "fr_FR": "Binaire" }
+        },
+        "labels": { "default": "Type", "fr_FR": "Type" }
+    },
+	
+    "document_automation_template/property/name": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Name", "fr_FR": "Nom" }
+    },
+	
+    "document_automation_template/property/parts": {
+        "definition": "inline",
+        "type": "wysiwyg",
+        "labels": { "default": "Text", "fr_FR": "Texte" }
+    },
+	
+    "document_automation_template/property/mime": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "application/pdf": { "default": "PDF" },
+            "application/json": { "default": "JSON" }
+        },
+        "labels": { "default": "Mime type", "fr_FR": "Type mime" }
+    },
+	
+    "document_automation_template/property/version": {
+        "definition": "inline",
+        "type": "number",
+        "labels": { "default": "Version", "fr_FR": "Version" }
+    },
+    
+    "document_automation_template/property/touched_at": {
+		"definition": "inline",
+		"type": "datetime",
+		"labels": {
+			"default": "Last update",
+			"fr_FR": "Dernière mise à jour"
+		}
+    },
+
+    "document_automation_template/index/automationTemplate": {
+        "bodyRenderer": "renderBody10",
+        "searchRenderer": "renderSearch",
+        "listRenderer": "renderTable",
+        "listView": "/document/json"
+    },
+
+    "document_automation_template/view/default": {
+        "properties": {
+            "name": {}
+        }
+    },
+
+    "document_automation_template/list/default": {
+        "where": "",
+        "order": "-touched_at",
+        "properties": {
+            "name": {}
+        }
+    },
+
+    "document_automation_template/detail/default": {
+        "tabs": {
+            "update": {
+                "definition": "inline",
+                "route": "/document/json/document_automation_template",
+                "labels": {"en_US": "Update", "fr_FR": "Modifier"},
+                "key": "id"
+            }
+        }
+    },
+
+	"document_automation_template/update/default": {
+        "layout": {
+            "": {
+                "properties": ["name", "parts", "touched_at"]
+            }
+        },
+        "properties": {
+            "name": {},
+            "parts": {},
+            "touched_at": { "consistency": true }
+        }
+    }
+}

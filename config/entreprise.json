@@ -1,0 +1,603 @@
+{
+    "entreprise/model": {
+        "entities": {
+            "place": { "table": "place", "foreignKey": "place_id", "foreignEntity": "entreprise" },
+            "contact_1": { "table": "vcard", "foreignKey": "contact_1_id", "foreignEntity": "entreprise" },
+            "profile": { "table": "profile", "foreignKey": "owner_id", "foreignEntity": "entreprise" }
+        },
+        "properties": {
+            "id": { "entity": "entreprise", "column": "id", "type": "primary" },
+            "status": { "entity": "entreprise", "column": "status", "audit": true },
+            "name": { "entity": "entreprise", "column": "name" },
+            "sector": { "entity": "entreprise", "column": "sector" },
+            "school": { "entity": "entreprise", "column": "school", "audit": true },
+            "place_id": { "entity": "entreprise", "column": "place_id", "type": "int", "audit": true },
+            "place_name": { "entity": "place", "column": "name" },
+            "owner_id": { "entity": "entreprise", "column": "owner_id", "type": "int" },
+            "owner_n_first": { "entity": "profile", "column": "n_first" },
+            "owner_n_last": { "entity": "profile", "column": "n_last" },
+            "owner_n_fn": { "entity": "profile", "column": "owner_n_fn", "type": "CONCAT", "components": ["owner_n_last", " ", "owner_n_first"] },
+            "contact_1_id": { "entity": "entreprise", "column": "contact_1_id", "type": "int" },
+            "n_title": { "entity": "contact_1", "column": "n_title" },
+            "n_first": { "entity": "contact_1", "column": "n_first" },
+            "n_last": { "entity": "contact_1", "column": "n_last" },
+            "n_fn": { "entity": "contact_1", "column": "n_fn", "type": "CONCAT", "components": ["n_last", " ", "n_first"] },
+            "email": { "entity": "contact_1", "column": "email" },
+            "tel_cell": { "entity": "contact_1", "column": "tel_cell" },
+            "adr_street": { "entity": "contact_1", "column": "adr_street" },
+            "adr_extended": { "entity": "contact_1", "column": "adr_extended" },
+            "adr_post_office_box": { "entity": "contact_1", "column": "adr_post_office_box" },
+            "adr_zip": { "entity": "contact_1", "column": "adr_zip" },
+            "adr_city": { "entity": "contact_1", "column": "adr_city" },
+            "adr_state": { "entity": "contact_1", "column": "adr_state" },
+            "adr_country": { "entity": "contact_1", "column": "adr_country" },
+            "opening_date": { "entity": "entreprise", "column": "opening_date", "type": "date" },
+            "callback_date": { "entity": "entreprise", "column": "callback_date", "type": "date" },
+            "next_meeting_date": { "entity": "entreprise", "column": "next_meeting_date", "type": "date" },
+            "origine": { "entity": "entreprise", "column": "origine" },
+
+            "visibility": { "entity": "entreprise", "column": "visibility", "audit": true },
+            "touched_at": { "entity": "entreprise", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "entreprise", "column": "touched_by", "type": "int" }
+        }
+    },
+
+	"entreprise/property/status": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "new": { "default": "À contacter" },
+            "repondeur": { "default": "Répondeur" },
+            "a_relancer": { "default": "À relancer" },
+            "candidate": { "default": "Qualifié (Candidat)" },
+            "non_qualifie": { "default": "Non qualifié" },
+            "ne_plus_contacter": { "default": "Ne plus contacter" },
+            "black_liste": { "default": "Black listé" }
+        },
+        "labels": {
+                "default": "Status",
+                "fr_FR": "Statut"
+        },
+        "mandatory": true
+    },
+
+	"entreprise/property/name": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+                "default": "Name",
+                "fr_FR": "Nom / Raison sociale"
+        },
+        "mandatory": true
+    },
+
+	"entreprise/property/sector": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+			"aero": { "default": "To be translated", "fr_FR": "Aéronautique" },
+			"adm_pub": { "default": "To be translated", "fr_FR": "Administrations Publiques & Collectivités" },
+			"agri": { "default": "To be translated", "fr_FR": "Agriculture" },
+			"agro": { "default": "To be translated", "fr_FR": "Agroalimentaire" },
+			"armee": { "default": "To be translated", "fr_FR": "Armée, défense" },
+			"asso": { "default": "To be translated", "fr_FR": "Associatif" },
+			"equipement": { "default": "To be translated", "fr_FR": "Automobile" },
+			"banque": { "default": "To be translated", "fr_FR": "Banque / Assurance" },
+			"btp": { "default": "To be translated", "fr_FR": "Bâtiment" },
+			"commerce": { "default": "To be translated", "fr_FR": "Commerce" },
+			"conseil_informatique": { "default": "To be translated", "fr_FR": "Conseil / informatique / digital" },
+			"eco_so": { "default": "To be translated", "fr_FR": "Économie sociale et solidaire" },
+			"edu": { "default": "To be translated", "fr_FR": "Éducation" },
+			"electricite": { "default": "To be translated", "fr_FR": "Énergie" },
+			"even": { "default": "To be translated", "fr_FR": "Évènementiel" },
+			"environnement": { "default": "To be translated", "fr_FR": "Environnement / Développement durable" },
+			"ges_risques": { "default": "To be translated", "fr_FR": "Gestion des risques" },
+			"gr_dist": { "default": "To be translated", "fr_FR": "Grande Distribution" },
+			"immo": { "default": "To be translated", "fr_FR": "Immobilier" },
+			"industrie": { "default": "To be translated", "fr_FR": "Industrie" },
+			"jeux_v": { "default": "To be translated", "fr_FR": "Jeux vidéos" },
+			"marketing": { "default": "To be translated", "fr_FR": "Marketing" },
+			"textile": { "default": "To be translated", "fr_FR": "Mode" },
+			"edition": { "default": "To be translated", "fr_FR": "Multimédia" },
+			"bois": { "default": "To be translated", "fr_FR": "Recyclage et gestion des déchets" },
+			"rh": { "default": "To be translated", "fr_FR": "Ressources humaines" },
+			"pharmacie": { "default": "To be translated", "fr_FR": "Santé" },
+			"sport": { "default": "To be translated", "fr_FR": "Sport" },
+			"tourisme": { "default": "To be translated", "fr_FR": "Tourisme, hôtellerie" },
+			"transport": { "default": "To be translated", "fr_FR": "Transport" },
+			"autre": { "default": "To be translated", "fr_FR": "Autres" }
+        },
+        "labels": {
+                "default": "Sector of activity",
+                "fr_FR": "Secteur d’activité"
+        },
+        "mandatory": true
+    },
+
+    "entreprise/property/school": { 
+        "definition": "inline",
+        "type": "select",
+		"modalities": {
+            "bts_mco": { "default": "Commerce" },
+            "bts_com": { "default": "Communication" },
+            "dcg": { "default": "Comptabilité et Gestion" },
+            "bachelor_rh": { "default": "Ressources Humaines" },
+            "mastere_business_management": { "default": "Management" },
+            "mastere_juriste": { "default": "Juriste" }
+		},
+		"labels": {
+			"default": "Formation"
+		}
+    },
+
+    "entreprise/property/place_id": {
+		"definition": "inline",
+		"type": "source",
+        "entity": "place",
+        "where": "status:new",
+        "order": "name",
+        "format": ["%s", "name"],
+		"labels": {
+			"default": "Place",
+			"fr_FR": "Campus"
+		}
+    },
+
+    "entreprise/property/place_name": {
+		"definition": "inline",
+		"type": "input",
+		"labels": {
+			"default": "Place",
+			"fr_FR": "Campus"
+		}
+    },
+
+    "entreprise/property/owner_id": {
+		"definition": "inline",
+		"type": "source",
+        "entity": "profile",
+        "view": "profile",
+        "where": "role:commercial_financier,operationnel_administratif,operationnel_alternant,operationnel_stagiaire",
+        "order": "n_fn",
+        "format": ["%s", "n_fn"],
+		"labels": {
+			"default": "Commercial affecté"
+		}
+    },
+
+    "entreprise/property/owner_n_fn": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Commercial affecté"
+        }
+    },
+
+    "entreprise/property/identifier": {
+		"definition": "inline",
+		"type": "input",
+		"labels": {
+			"default": "Identifier",
+			"fr_FR": "Identifiant"
+		}
+    },
+
+    "entreprise/property/email_work": {
+        "definition": "inline",
+        "type": "email",
+        "labels": {
+            "default": "School e-mail",
+            "fr_FR": "Email école"
+        }
+    },
+    
+    "entreprise/property/contact_1_id": {
+		"definition": "inline",
+		"type": "photo",
+		"labels": {
+			"default": "",
+			"fr_FR": ""
+		}
+    },
+
+    "entreprise/property/n_title": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Title",
+            "fr_FR": "Titre"
+        }
+    },
+
+    "entreprise/property/n_first": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "First name",
+            "fr_FR": "Prénom"
+        }
+    },
+
+    "entreprise/property/n_last": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Last name",
+            "fr_FR": "Nom"
+        }
+    },
+
+    "entreprise/property/n_fn": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Name",
+            "fr_FR": "Nom"
+        }
+    },
+
+    "entreprise/property/email": {
+        "definition": "inline",
+        "type": "email",
+        "labels": {
+            "default": "Email",
+            "fr_FR": "Email"
+        }
+    },
+
+    "entreprise/property/tel_cell": {
+        "definition": "inline",
+        "type": "phone",
+        "labels": {
+            "default": "Cellular",
+            "fr_FR": "Mobile"
+        }
+    },
+
+    "entreprise/property/adr_street": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Address",
+            "fr_FR": "Adresse"
+        }
+    },
+
+    "entreprise/property/adr_extended": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Complement",
+            "fr_FR": "Complément"
+        }
+    },
+
+    "entreprise/property/adr_post_office_box": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Post office box",
+            "fr_FR": "Boîte postale"
+        }
+    },
+
+    "entreprise/property/adr_zip": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Zip code",
+            "fr_FR": "Code postal"
+        }
+    },
+
+    "entreprise/property/adr_city": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "City",
+            "fr_FR": "Ville"
+        }
+    },
+
+    "entreprise/property/adr_state": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "State",
+            "fr_FR": "Etat"
+        }
+    },
+
+    "entreprise/property/adr_country": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "ue": { "default": "Union européenne" },
+            "hors_ue": { "default": "Hors union européenne" }
+        },
+        "labels": {
+            "default": "Country",
+            "fr_FR": "Zone de résidence"
+        }
+    },
+
+    "entreprise/property/opening_date": {
+		"definition": "inline",
+		"type": "date",
+		"labels": {
+			"default": "1st contact date",
+			"fr_FR": "Date 1er contact"
+		}
+    },
+    
+    "entreprise/property/callback_date": {
+		"definition": "inline",
+		"type": "date",
+		"labels": {
+			"default": "Callback date",
+			"fr_FR": "Date de rappel"
+		}
+    },
+
+    "entreprise/property/next_meeting_date": {
+        "definition": "inline",
+        "type": "date",
+        "labels": {
+            "default": "Next meeting_date",
+            "fr_FR": "Prochain rendez-vous"
+        }
+    },
+    
+    "entreprise/property/subscription_date": {
+		"definition": "inline",
+		"type": "date",
+		"labels": {
+			"default": "Subscription date",
+			"fr_FR": "Date d’inscription"
+		}
+    },
+
+    "entreprise/property/cancellation_date": {
+        "definition": "inline",
+        "type": "date",
+        "labels": {
+            "default": "Cancellation date",
+            "fr_FR": "Date Annulation"
+        }
+    },
+
+    "entreprise/property/origine": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+                "web": { "default": "Web site", "fr_FR": "Site web" },
+                "incoming": { "default": "Incoming call", "fr_FR": "Appel entrant" },
+                "jpo": { "default": "Journée Porte Ouverte" },
+                "salon": { "default": "Salon" },
+                "file": { "default": "File", "fr_FR": "Fichier" }
+        },
+        "labels": {
+                "default": "Origine",
+                "fr_FR": "Origine"
+        }
+    },
+
+    "entreprise/property/contacts": {
+		"definition": "inline",
+		"type": "history",
+        "entity": "contact",
+        "key": "entreprise_id",
+		"labels": {
+			"default": "History",
+			"fr_FR": "Historique"
+		}
+    },
+    
+    "entreprise/property/touched_at": {
+		"definition": "inline",
+		"type": "datetime",
+		"labels": {
+			"default": "Last update",
+			"fr_FR": "Dernière mise à jour"
+		}
+    },
+		
+	"entreprise/index/appEntreprise": {
+        "bodyRenderer": "renderBody10",
+        "searchRenderer": "renderSearch",
+        "listRenderer": "renderTable"
+    }, 
+
+	"entreprise/count/default": {
+		"new": { "filters": { "status": "new" }, "labels": { "default": "Nouveau" } },
+		"callback": { "filters": { "status": "callback" }, "labels": { "default": "À rappeler" } }
+    },
+
+    "entreprise/search/default": { 
+        "properties": { 
+            "status": { "multiple": true },
+            "sector": { "multiple": true },
+            "school": { "multiple": true },
+            "place_id": { "multiple": true },
+            "owner_id": {},
+            "n_fn": { "completion": { "where": "status:nouvelle_candidature,entretien_programme,absent_entretien,entretien_termine,attente_dossier,dossier_en_verification,attente_signature,contrat_signe,inscrit_inital,inscrit_sans_entreprise,inscrit_avec_entreprise,inscrit_sfp,perdu" } },
+            "email": {},
+            "tel_cell": {},
+            "callback_date": {},
+            "next_meeting_date": {}
+        }
+    },
+	
+	"entreprise/list/default": {
+        "measure": "amount",
+        "properties": { 
+            "status": {},
+            "school": {},
+            "place_id": {},
+            "owner_n_fn": {},
+            "n_fn": { "detailCaption": true },
+            "email": {},
+            "tel_cell": {},
+            "next_meeting_date": {},
+            "subscription_date": {}
+        }
+    },
+	
+	"entreprise/view/default": { 
+        "measure": "amount",
+        "properties": { 
+            "status": {},
+            "school": {},
+            "place_name": {},
+            "owner_n_fn": {},
+            "n_fn": { "detailCaption": true },
+            "email": {},
+            "tel_cell": {},
+            "next_meeting_date": {},
+            "subscription_date": {}
+        }
+    },
+
+    "entreprise/detail/default": {
+        "tabs": {
+            "contact_1": {
+                "definition": "inline",
+                "route": "/bo/update/entreprise",
+                "labels": {"default": "Update", "fr_FR": "Modifier"},
+                "key": "id"
+            },
+            "add": {
+                "definition": "inline",
+                "route": "/bo/add/entreprise",
+                "labels": {"default": "Add", "fr_FR": "Ajouter"},
+                "key": false
+            }
+        }
+    },
+
+	"entreprise/add/default": {
+        "layout": {
+            "intro": {
+                "properties": ["status"]
+            },
+            "personal_data": {
+                "labels": { "default": "Personal data", "fr_FR": "Données personnelles" },
+                "properties": ["n_title", "n_first", "n_last", "email", "tel_cell"]
+            },
+            "comments": {
+                "labels": { "default": "Comments", "fr_FR": "Commentaires" },
+                "properties": ["contacts"]
+            }
+        },
+        "properties": {
+            "status": { "mandatory": true },
+            "n_title": {},
+            "n_first": { "mandatory": true },
+            "n_last": { "mandatory": true },
+            "email": { "mandatory": true },
+            "tel_cell": {},
+            "contacts": {}
+        }
+    },
+
+	"entreprise/update/default": {
+        "layout": {
+            "intro": {
+                "properties": ["status", "sector", "opening_date", "callback_date", "origine"]
+            },
+            "personal_data": {
+                "labels": { "default": "Personal data", "fr_FR": "Données personnelles" },
+                "properties": ["n_title", "n_first", "n_last", "email", "tel_cell", "adr_street", "adr_zip", "adr_city"]
+            },
+            "comments": {
+                "labels": { "default": "Comments", "fr_FR": "Commentaires" },
+                "properties": ["contacts"]
+            }
+        },
+        "properties": {
+            "touched_at": { "consistency": true },
+            "status": { "mandatory": true },
+            "school": { "mandatory": true },
+            "sector": { "mandatory": true },
+            "place_id": { "mandatory": true },
+            "owner_id": {}, 
+            "opening_date": {},
+            "callback_date": {},
+            "origine": {},
+            "n_title": {},
+            "n_first": {},
+            "n_last": { "mandatory": true },
+            "email": {},
+            "tel_cell": {},
+            "adr_street": {},
+            "adr_zip": {},
+            "adr_city": {},
+            "contacts": {}
+        }
+    },
+
+    "entreprise/groupUpdate/default": { 
+        "properties": {
+            "status": { "mandatory": true },
+            "callback_date": { "mandatory": true },
+            "school": {},
+            "sector": {},
+            "place_id": {},
+            "contact_history": { "mandatory": true }
+        }
+    },
+
+    "entreprise/export/default": { 
+        "properties": { 
+            "school": {},
+            "sector": {},
+            "place_name": {},
+            "status": {},
+            "opening_date": {},
+            "callback_date": {},
+            "origine": {},
+            "n_title": {},
+            "n_first": {},
+            "n_last": {},
+            "email": {},
+            "tel_cell": {},
+            "adr_street": {},
+            "adr_zip": {},
+            "adr_city": {},
+            "next_meeting_date": {},
+            "contact_history": {}
+        }
+    },
+
+	"entreprise/form/default": {
+        "layout": {
+            "eleve": {
+                "properties": [
+                    "gender",
+                    "n_first", "n_last",
+                    "email", "tel_cell",
+                    "school"
+                ]
+            },
+            "comments": {
+                "labels": { "default": "Comments", "fr_FR": "Commentaires" },
+                "properties": ["contacts", "contact_agreement"]
+            }
+        },
+        "properties": {
+            "gender": { "class": "col-md-12 mb-3", "required": true },
+            "n_last": { "class": "col-md-6 mb-3", "required": true },
+            "n_first": { "class": "col-md-6 mb-3", "required": true },
+            "email": { "class": "col-md-6 mb-3", "required": true },
+            "tel_cell": { "class": "col-md-6 mb-3", "required": true },
+            "school": { "class": "col-md-12 mb-3", "required": true },
+            "contacts": { "class": "col-md-12 mb-3" },
+            "contact_agreement": {
+                "type": "checkbox", 
+                "labels": { "default": "I aggree to be contacted again", "fr_FR": "J’accepte d’être recontacté" }, 
+                "class": "col-md-12 mb-3",
+                "required": true
+            }
+        }
+    }
+}

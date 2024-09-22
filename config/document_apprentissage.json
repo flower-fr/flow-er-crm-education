@@ -1,0 +1,79 @@
+{
+    "document_apprentissage/model": {
+        "entities": {
+        },
+        "properties": {
+            "id": { "entity": "document_apprentissage", "column": "id", "type": "primary" },
+            "type": { "entity": "document_apprentissage", "column": "type" },
+            "learner_id": { "entity": "document_apprentissage", "column": "learner_id", "type": "int" },
+            "name": { "entity": "document_apprentissage", "column": "name" },
+            "mime": { "entity": "document_apprentissage", "column": "mime" },
+            "version": { "entity": "document_apprentissage", "column": "version", "type": "smallint" },
+            "content_vector": { "entity": "document_apprentissage", "column": "content_vector", "type": "mediumtext" },
+
+            "visibility": { "entity": "document_apprentissage", "column": "visibility", "audit": true },
+            "touched_at": { "entity": "document_apprentissage", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "document_apprentissage", "column": "touched_by", "type": "int" }
+       }
+    },
+	
+    "document_apprentissage/property/type": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "text": { "default": "text", "fr_FR": "Texte" },
+            "binay": { "default": "binary", "fr_FR": "Binaire" }
+        },
+        "labels": { "default": "Type", "fr_FR": "Type" }
+    },
+	
+    "document_apprentissage/property/learner_id": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Learner", "fr_FR": "apprenant" }
+    },
+	
+    "document_apprentissage/property/name": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Name", "fr_FR": "Nom" }
+    },
+	
+    "document_apprentissage/property/mime": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "application/pdf": { "default": "PDF" },
+            "application/json": { "default": "JSON" }
+        },
+        "labels": { "default": "Mime type", "fr_FR": "Type mime" }
+    },
+	
+    "document_apprentissage/property/version": {
+        "definition": "inline",
+        "type": "number",
+        "labels": { "default": "Version", "fr_FR": "Version" }
+    },
+
+    "document_apprentissage/view/default": {
+        "properties": {
+            "type": {},
+            "learner_id": {},
+            "name": {},
+            "mime": {},
+            "version": {}
+        }
+    },
+
+    "document_apprentissage/list/default": {
+        "where": "",
+        "order": "-touched_at",
+        "properties": {
+            "type": {},
+            "learner_id": {},
+            "name": {},
+            "mime": {},
+            "version": {}
+        }
+    }
+}
