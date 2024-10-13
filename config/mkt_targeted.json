@@ -306,7 +306,8 @@
         }
     },
     	
-	"mkt_targeted/index/campaign": {
+	"mkt_targeted/index/default": {
+        "modalRenderers": {},
         "bodyRenderer": "renderBody10",
         "searchRenderer": "renderSearch",
         "listRenderer": "renderTable"

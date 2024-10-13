@@ -63,6 +63,7 @@
             "opening_date": { "entity": "candidat", "column": "opening_date", "type": "date" },
             "callback_date": { "entity": "candidat", "column": "callback_date", "type": "date" },
             "next_meeting_date": { "entity": "candidat", "column": "next_meeting_date", "type": "date" },
+            "next_meeting_time": { "entity": "candidat", "column": "next_meeting_time", "type": "time" },
             "subscription_date": { "entity": "candidat", "column": "subscription_date", "type": "date" },
             "cancellation_date": { "entity": "candidat", "column": "cancellation_date", "type": "date" },
             "origine": { "entity": "candidat", "column": "origine" },
@@ -175,8 +176,6 @@
         "definition": "inline",
         "type": "select",
         "modalities": {
-            "bts_1": { "fr_FR": "BTS 1" },
-            "bts_2": { "fr_FR": "BTS 2" },
             "b1": { "fr_FR": "Bachelor 1" },
             "b2": { "fr_FR": "Bachelor 2" },
             "b3": { "fr_FR": "Bachelor 3" },
@@ -549,8 +548,17 @@
         "definition": "inline",
         "type": "date",
         "labels": {
-            "default": "Next meeting_date",
-            "fr_FR": "Prochain rendez-vous"
+            "default": "Next meeting date",
+            "fr_FR": "Date du prochain rendez-vous"
+        }
+    },
+
+    "candidat/property/next_meeting_time": {
+        "definition": "inline",
+        "type": "time",
+        "labels": {
+            "default": "Next meeting time",
+            "fr_FR": "Heure du prochain rendez-vous"
         }
     },
     
@@ -773,10 +781,8 @@
     },
 		
 	"candidat/index/prospect": {
-        "bodyRenderer": "renderBody10",
-        "searchRenderer": "renderSearch",
-        "listRenderer": "renderColumns",
-        "restriction": "status:new,repondeur,a_relancer,candidate"
+        "modalRenderers": {
+        }
     }, 
 	
 	"candidat/index/commercial": {}, 
@@ -800,9 +806,7 @@
             "owner_id": {},
             "n_fn": { "completion": { "where": "status:nouvelle_candidature,entretien_programme,absent_entretien,entretien_termine,attente_dossier,dossier_en_verification,attente_signature,contrat_signe,inscrit_inital,inscrit_sans_entreprise,inscrit_avec_entreprise,inscrit_sfp,perdu" } },
             "email": {},
-            "tel_cell": {},
-            "callback_date": {},
-            "next_meeting_date": {}
+            "tel_cell": {}
         }
     },
 
@@ -1129,6 +1133,9 @@
                 "properties": ["contacts", "contact_agreement"]
             }
         },
+        "hidden": ["status", "callback_date"],
+        "identifier": ["email", "n_first"],
+        "foreignKeys": ["account_id", "contact_1_id"],
         "properties": {
             "gender": { "class": "col-md-12 mb-3", "required": true },
             "n_last": { "class": "col-md-6 mb-3", "required": true },
@@ -1144,8 +1151,11 @@
                 "labels": { "default": "I aggree to be contacted again", "fr_FR": "J’accepte d’être recontacté" }, 
                 "class": "col-md-12 mb-3",
                 "required": true
-            }
-        }
+            },
+            "status": { "type": "hidden", "value": "new", "update": true },
+            "callback_date": { "type": "hidden", "value": "today", "update": true }
+        },
+        "renderer": "mdb"
     },
 
 	"candidat/form/protected": {
