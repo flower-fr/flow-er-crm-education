@@ -67,6 +67,7 @@
             "subscription_date": { "entity": "candidat", "column": "subscription_date", "type": "date" },
             "cancellation_date": { "entity": "candidat", "column": "cancellation_date", "type": "date" },
             "origine": { "entity": "candidat", "column": "origine" },
+            "web_query": { "entity": "candidat", "column": "web_query", "max_length": 65535 },
             "amount": { "entity": "candidat", "column": "amount", "type": "float" },
             "default_means_of_payment": { "entity": "candidat", "column": "default_means_of_payment" },
             "transfer_order_id": { "entity": "candidat", "column": "transfer_order_id" },

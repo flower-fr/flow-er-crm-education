@@ -36,8 +36,10 @@
 
     "tab/commercial": {
         "menu": "menu/admission",
-        "route": "/bo/index/candidat",
-        "urlParams": "view=marketing",
+        "controller": "mdb",
+        "action": "index",
+        "entity": "candidat",
+        "view": "commercial",
         "labels": { "default": "Candidats" }
     },
 

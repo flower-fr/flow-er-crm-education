@@ -1,0 +1,264 @@
+{
+    "edu_contact/model": {
+        "entities": {
+            "candidat": { "table": "candidat", "foreignKey": "candidat_id", "foreignEntity": "edu_contact" },
+            "place": { "table": "place", "foreignKey": "place_id", "foreignEntity": "candidat" },
+            "contact_1": { "table": "vcard", "foreignKey": "contact_1_id", "foreignEntity": "candidat" },
+            "user": { "table": "user", "foreignKey": "touched_by", "foreignEntity": "candidat" }
+        },
+        "properties": {
+            "id": { "entity": "edu_contact", "column": "id", "type": "primary" },
+            "chanel": { "entity": "edu_contact", "column": "chanel" },
+            "direction": { "entity": "edu_contact", "column": "direction" },
+            "candidat_id": { "entity": "edu_contact", "column": "candidat_id", "type": "int" },
+            "text": { "entity": "edu_contact", "column": "text", "max_length": 65535 },
+
+            "place_id": { "entity": "place", "column": "id" },
+            "place_name": { "entity": "place", "column": "name" },
+
+            "status": { "entity": "candidat", "column": "status" },
+            "callback_date": { "entity": "candidat", "column": "callback_date" },
+
+            "contact_1_id": { "entity": "candidat", "column": "contact_1_id", "type": "int" },
+            "n_first": { "entity": "contact_1", "column": "n_first" },
+            "n_last": { "entity": "contact_1", "column": "n_last" },
+            "n_fn": { "entity": "contact_1", "column": "n_fn", "type": "CONCAT", "components": ["n_last", " ", "n_first"] },
+            "email": { "entity": "contact_1", "column": "email" },
+            "tel_cell": { "entity": "contact_1", "column": "tel_cell" },
+
+            "user_n_fn": { "entity": "user", "column": "n_fn" },
+
+            "visibility": { "entity": "edu_contact", "column": "visibility", "audit": true },
+            "touched_at": { "entity": "edu_contact", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "edu_contact", "column": "touched_by", "type": "int" }
+       }
+    },
+
+    "edu_contact/property/chanel": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "form": { "default": "Form", "fr_FR": "Formulaire" },
+            "email": { "default": "Email", "fr_FR": "Email" },
+            "sms": { "default": "SMS", "fr_FR": "SMS" },
+            "phone": { "default": "Phone", "fr_FR": "Téléphone" }
+        },
+        "labels": {
+            "default": "Texte"
+        }
+    },
+
+    "edu_contact/property/direction": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "outbound": { "default": "Outbound", "fr_FR": "Sortant" },
+            "inbound": { "default": "Inbound", "fr_FR": "Entrant" }
+        },
+        "labels": {
+            "default": "Texte"
+        }
+    },
+
+    "edu_contact/property/text": {
+        "definition": "inline",
+        "type": "textarea",
+        "labels": {
+            "default": "Texte"
+        }
+    },
+
+    "edu_contact/property/candidat_id": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Compte"
+        }
+    },
+
+    "edu_contact/property/n_fn": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Nom"
+        }
+    },
+
+    "edu_contact/property/user_n_fn": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Par"
+        }
+    },
+
+    "edu_contact/property/touched_at": {
+        "definition": "inline",
+        "type": "datetime",
+        "labels": {
+            "default": "Registered at",
+            "fr_FR": "Enregistré le"
+        }
+    },
+
+    "edu_contact/property/status": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "new": { "default": "Prise de contact" },
+            "appointment": { "default": "Rendez-vous" },
+            "proposal": { "default": "Proposition" },
+            "relance": { "default": "Relance" },
+            "active": { "default": "Contrat" },
+            "gone": { "default": "Contrat" }
+        },
+        "labels": {
+            "default": "Status",
+            "fr_FR": "Statut"
+        }
+    },
+
+    "edu_contact/property/date_active": {
+        "definition": "inline",
+        "type": "date",
+        "labels": {
+            "default": "Signature date",
+            "fr_FR": "Date de signature"
+        }
+    },
+
+    "edu_contact/property/callback_date": {
+        "definition": "inline",
+        "type": "date",
+        "labels": {
+            "default": "Callback date",
+            "fr_FR": "Date de rappel"
+        }
+    },
+
+    "edu_contact/property/place_id": {
+        "definition": "inline",
+        "type": "source",
+        "entity": "place",
+        "key": "id",
+        "format": ["%s (%s)", "name,region"],
+        "where": "status:new|region:?place_region",
+        "order": "name",
+        "labels": {
+            "default": "Place",
+            "fr_FR": "Établissement"
+        }
+    },
+
+    "edu_contact/property/place_name": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Place",
+            "fr_FR": "Établissement"
+        }
+    },
+
+    "edu_contact/property/n_first": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "First name",
+            "fr_FR": "Prénom"
+        }
+    },
+
+    "edu_contact/property/n_last": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Last name",
+            "fr_FR": "Nom"
+        }
+    },
+
+    "edu_contact/property/email": {
+        "definition": "inline",
+        "type": "email",
+        "labels": {
+            "default": "Email",
+            "fr_FR": "Email"
+        }
+    },
+
+    "edu_contact/property/tel_cell": {
+        "definition": "inline",
+        "type": "phone",
+        "labels": {
+            "default": "Cellular",
+            "fr_FR": "Téléphone portable"
+        }
+    },
+
+	"edu_contact/index/default": {
+        "restriction": "property:origine",
+        "bodyRenderer": "renderBody10",
+        "searchRenderer": "renderSearch",
+        "listRenderer": "renderTreeTable"
+    }, 
+
+	"edu_contact/search/default": { 
+        "view": "renderSearchB5",
+        "properties": { 
+            "place_id": { "multiple": true },
+            "user_n_fn": {},
+            "n_fn": {},
+            "email": {},
+            "tel_cell": {}
+        }
+    },
+	
+	"edu_contact/list/default": { 
+        "view": "renderDataviewB5",
+        "measure": "amount",
+        "segmentation": {
+            "key": "candidat_id",
+            "label": "n_fn"
+        },
+        "properties": { 
+            "candidat_id": { "depth": 1 },
+            "n_fn": { "depth": 1 },
+            "touched_at": {},
+            "place_name": {},
+            "user_n_fn": {},
+            "email": {},
+            "tel_cell": {}
+        }
+    },
+
+    "edu_contact/detail/default": {
+        "tabs": {
+            "add": {
+                "definition": "inline",
+                "route": "/bo/add/contact",
+                "labels": {"en_US": "Add", "fr_FR": "Ajouter"},
+                "key": false
+            }
+        }
+    },
+
+    "edu_contact/modalList/default": {
+        "properties": {
+            "touched_at": {},
+            "chanel": {},
+            "text": {}
+        }
+    },
+
+    "edu_contact/export/default": { 
+        "properties": { 
+            "n_fn": {},
+            "touched_at": {},
+            "place_name": {},
+            "user_n_fn": {}, 
+            "email": {},
+            "tel_cell": {}
+        }
+    }
+}
+
