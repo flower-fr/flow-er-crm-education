@@ -41,7 +41,8 @@
             "form": { "default": "Form", "fr_FR": "Formulaire" },
             "email": { "default": "Email", "fr_FR": "Email" },
             "sms": { "default": "SMS", "fr_FR": "SMS" },
-            "phone": { "default": "Phone", "fr_FR": "Téléphone" }
+            "phone": { "default": "Phone", "fr_FR": "Téléphone" },
+            "bo": { "default": "Back-office", "fr_FR": "Back-office" }
         },
         "labels": {
             "default": "Texte"

@@ -80,6 +80,22 @@
         }
     },
 
+    "candidat/property/id": {
+		"definition": "inline",
+		"type": "input",
+		"labels": {
+			"default": "candidat_id"
+		}
+    },
+
+    "candidat/property/contact_1_id": {
+		"definition": "inline",
+		"type": "input",
+		"labels": {
+			"default": "contact_1_id"
+		}
+    },
+
 	"candidat/property/status": {
         "definition": "inline",
         "type": "select",
@@ -240,15 +256,6 @@
             "default": "School e-mail",
             "fr_FR": "Email école"
         }
-    },
-    
-    "candidat/property/contact_1_id": {
-		"definition": "inline",
-		"type": "photo",
-		"labels": {
-			"default": "",
-			"fr_FR": ""
-		}
     },
 
     "candidat/property/n_title": {
@@ -746,8 +753,15 @@
 		"definition": "inline",
 		"type": "datetime",
 		"labels": {
-			"default": "Last update",
-			"fr_FR": "Dernière mise à jour"
+			"default": "Touched at"
+		}
+    },
+    
+    "candidat/property/touched_by": {
+		"definition": "inline",
+		"type": "input",
+		"labels": {
+			"default": "Touched by"
 		}
     },
 
@@ -1115,7 +1129,9 @@
             "n_last_3": {},
             "tel_cell_3": {},
             "email_3": {},
-            "address_3": {}
+            "address_3": {},
+            "id": {},
+            "contact_1_id": {}
         }
     },
 

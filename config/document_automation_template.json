@@ -66,11 +66,17 @@
     "document_automation_template/index/automationTemplate": {
         "bodyRenderer": "renderBody10",
         "searchRenderer": "renderSearch",
-        "listRenderer": "renderTable",
+        "listRenderer": "renderList",
         "listView": "/document/json"
     },
 
     "document_automation_template/view/default": {
+        "properties": {
+            "name": {}
+        }
+    },
+
+    "document_automation_template/search/default": {
         "properties": {
             "name": {}
         }

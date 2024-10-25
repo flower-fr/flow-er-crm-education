@@ -6,18 +6,38 @@
     },
 
     "applications": {
-		"admission": {
+		"marketing": {
+			"labels": { "default": "Marketing" },
+			"default": "automationTemplate"
+        },
+        "admission": {
 			"labels": { "default": "Admission" },
 			"default": "prospect",
 			"defaultRole": "sales_manager"
         },
-		"marketing": {
-			"labels": { "default": "Marketing" },
-			"default": "automation_template"
+        "apprentissage": {
+			"labels": { "default": "Apprentissage" },
+			"default": "appEvaluation"
+        },
+		"finance": {
+			"labels": { "default": "Flow-ER Finance" },
+			"default": "fiCommitment",
+			"defaultRole": "sales_manager"
+        },
+		"learning": {
+			"labels": { "default": "Flow-ER Learning" },
+			"default": "learningLearner",
+			"defaultRole": "manager"
+        },
+		"bi": {
+			"labels": { "default": "Flow-ER BI" }
         },
 		"admin": {
 			"labels": { "default": "Admin" },
 			"default": "profile"
+        },
+		"studio": {
+			"labels": { "default": "Flow-ER Studio" }
         }
     },
 
@@ -29,8 +49,10 @@
 
     "tab/prospect": {
         "menu": "menu/admission",
-        "route": "/bo/index/candidat",
-        "urlParams": "view=prospect",
+        "controller": "mdb",
+        "action": "index",
+        "entity": "candidat",
+        "view": "prospect",
         "labels": { "default": "Prospects" }
     },
 
@@ -45,22 +67,28 @@
 
     "tab/event": {
         "menu": "menu/admission",
-        "route": "/bo/index/event",
-        "urlParams": "view=event",
+        "controller": "mdb",
+        "action": "index",
+        "entity": "event",
+        "view": "event",
         "labels": { "default": "Calendrier" }
     },
 
     "tab/configView": {
         "menu": "menu/admission",
-        "route": "/bo/index/config",
-        "urlParams": "view=configView",
+        "controller": "bo",
+        "action": "index",
+        "entity": "config",
+        "view": "confgiView",
         "labels": { "default": "Views", "fr_FR": "Vues" }
     },
 
-    "tab/candidatAudit": {
+    "tab/auditCandidat": {
         "menu": "menu/admin",
-        "route": "/bo/index/audit",
-        "urlParams": "view=auditCandidat",
+        "controller": "bo",
+        "action": "index",
+        "entity": "audit",
+        "view": "auditCandidat",
         "labels": { "default": "Audit candidats" }
     },
 
@@ -72,13 +100,19 @@
 
     "tab/auditStatus": {
         "menu": "menu/bi",
-        "route": "/mdb/index/audit",
-        "urlParams": "view=auditStatus",
+        "controller": "mdb",
+        "action": "index",
+        "entity": "audit",
+        "view": "auditStatus",
         "labels": { "default": "Actions commerciales 2024" }
     },
 
     "tab/auditOrigine": {
         "menu": "menu/bi",
+        "controller": "mdb",
+        "action": "index",
+        "entity": "audit",
+        "view": "auditOrigine",
         "route": "/mdb/index/audit",
         "urlParams": "view=auditOrigine",
         "labels": { "default": "Suivi par origine (à faire)" }
@@ -92,15 +126,19 @@
 
     "tab/automationTemplate": {
         "menu": "menu/marketing",
-        "route": "/mdb/index/document_automation_template",
-        "urlParams": "view=automationTemplate",
+        "controller": "mdb",
+        "action": "index",
+        "entity": "document_automation_template",
+        "view": "automationTemplate",
         "labels": { "default": "Automation templates" }
     },
 
     "tab/campaign": {
         "menu": "menu/marketing",
-        "route": "/mdb/index/mkt_targeted",
-        "urlParams": "view=campaign",
+        "controller": "mdb",
+        "action": "index",
+        "entity": "mkt_targeted",
+        "view": "campaign",
         "labels": { "default": "Campagnes" }
     },
 
@@ -112,15 +150,19 @@
 
     "tab/appEntreprise": {
         "menu": "menu/apprentissage",
-        "route": "/mdb/index/entreprise",
-        "urlParams": "view=appEntreprise",
+        "controller": "mdb",
+        "action": "index",
+        "entity": "entreprise",
+        "view": "appEntreprise",
         "labels": { "default": "Entreprises" }
     },
 
     "tab/appEvaluation": {
         "menu": "menu/apprentissage",
-        "route": "/mdb/index/document_apprentissage",
-        "urlParams": "view=appEvaluation",
+        "controller": "mdb",
+        "action": "index",
+        "entity": "document_apprentissage",
+        "view": "appEvaluation",
         "labels": { "default": "Évaluations tuteurs" }
     }
 }
