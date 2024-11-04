@@ -995,16 +995,19 @@
 
 	"candidat/add/default": {
         "layout": {
-            "intro": {
-                "properties": ["status"]
-            },
-            "personal_data": {
-                "labels": { "default": "Personal data", "fr_FR": "Données personnelles" },
-                "properties": ["n_title", "n_first", "n_last", "email", "tel_cell"]
-            },
-            "comments": {
-                "labels": { "en_US": "Comments", "fr_FR": "Commentaires" },
-                "properties": ["contacts"]
+            "cols" : { "content": { "class": "col-md-10" }, "scrollspy": { "class": "col-md-2" }},
+            "sections": {
+                "intro": {
+                    "properties": ["status"]
+                },
+                "personal_data": {
+                    "labels": { "default": "Personal data", "fr_FR": "Données personnelles" },
+                    "properties": ["n_title", "n_first", "n_last", "email", "tel_cell"]
+                },
+                "comments": {
+                    "labels": { "en_US": "Comments", "fr_FR": "Commentaires" },
+                    "properties": ["contacts"]
+                }
             }
         },
         "properties": {
@@ -1069,6 +1072,27 @@
             "school_situation": {},
             "current_level": {},
             "contacts": {}
+        }
+    },
+
+    "candidat/group/default": {
+        "tabs": {
+            "groupUpdate": {
+                "definition": "inline",
+                "route": "/bo/groupTab/candidat",
+                "controller": "bo",
+                "action": "groupTab",
+                "entity": "candidat",
+                "labels": {"en_US": "Group update", "fr_FR": "Modifier en masse"}
+            },
+            "groupEmail": {
+                "definition": "inline",
+                "route": "/bo/groupTab/mkt_targeted",
+                "controller": "bo",
+                "action": "groupTab",
+                "entity": "mkt_targeted",
+                "labels": {"en_US": "Group email", "fr_FR": "Email groupé"}
+            }
         }
     },
 

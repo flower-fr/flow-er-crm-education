@@ -128,7 +128,7 @@
         "menu": "menu/marketing",
         "controller": "mdb",
         "action": "index",
-        "entity": "document_automation_template",
+        "entity": "mkt_automation_template",
         "view": "automationTemplate",
         "labels": { "default": "Automation templates" }
     },

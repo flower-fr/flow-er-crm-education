@@ -1,0 +1,157 @@
+{
+    "mkt_automation_template/model": {
+        "entities": {
+        },
+        "properties": {
+            "id": { "entity": "mkt_automation_template", "column": "id", "type": "primary" },
+            "folder": { "entity": "mkt_automation_template", "column": "folder" },
+            "name": { "entity": "mkt_automation_template", "column": "name" },
+            "email_subject": { "entity": "mkt_automation_template", "column": "email_subject" },
+            "email_body": { "entity": "mkt_automation_template", "column": "email_body", "type": "mediumtext" },
+            "cc": { "entity": "mkt_automation_template", "column": "cc" },
+            "cci": { "entity": "mkt_automation_template", "column": "cci" },
+            "sms": { "entity": "mkt_automation_template", "column": "sms" },
+
+            "visibility": { "entity": "mkt_automation_template", "column": "visibility", "audit": true },
+            "touched_at": { "entity": "mkt_automation_template", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "mkt_automation_template", "column": "touched_by", "type": "int" }
+       }
+    },
+	
+    "mkt_automation_template/property/type": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "text": { "default": "text", "fr_FR": "Texte" },
+            "binay": { "default": "binary", "fr_FR": "Binaire" }
+        },
+        "labels": { "default": "Type", "fr_FR": "Type" }
+    },
+	
+    "mkt_automation_template/property/folder": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Folder", "fr_FR": "Dossier" }
+    },
+	
+    "mkt_automation_template/property/name": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Name", "fr_FR": "Nom" }
+    },
+	
+    "mkt_automation_template/property/email_subject": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Email subject", "fr_FR": "Object du mail" }
+    },
+	
+    "mkt_automation_template/property/email_body": {
+        "definition": "inline",
+        "type": "textarea",
+        "labels": { "default": "Email body", "fr_FR": "Corps du mail" }
+    },
+	
+    "mkt_automation_template/property/cc": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Cc", "fr_FR": "Cc" }
+    },
+	
+    "mkt_automation_template/property/cci": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Cci", "fr_FR": "Cci" }
+    },
+	
+    "mkt_automation_template/property/sms": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "SMS", "fr_FR": "SMS" }
+    },
+    
+    "mkt_automation_template/property/touched_at": {
+		"definition": "inline",
+		"type": "datetime",
+		"labels": {
+			"default": "Last update",
+			"fr_FR": "Dernière mise à jour"
+		}
+    },
+
+    "mkt_automation_template/index/automationTemplate": {
+        "bodyRenderer": "renderBody10",
+        "searchRenderer": "renderSearch",
+        "listRenderer": "renderList"
+    },
+
+    "mkt_automation_template/view/default": {
+        "properties": {
+            "folder": {},
+            "name": {},
+            "email_subject": {},
+            "email_body": {},
+            "cc": {},
+            "cci": {},
+            "sms": {}
+        }
+    },
+
+    "mkt_automation_template/search/default": {
+        "properties": {
+            "folder": {},
+            "name": {},
+            "email_subject": {}
+        }
+    },
+
+    "mkt_automation_template/list/default": {
+        "where": "",
+        "order": "-touched_at",
+        "properties": {
+            "folder": {},
+            "name": {},
+            "email_subject": {}
+        }
+    },
+
+    "mkt_automation_template/detail/default": {
+        "tabs": {
+            "update": {
+                "definition": "inline",
+                "route": "/bo/update/mkt_automation_template",
+                "labels": { "en_US": "Update", "fr_FR": "Modifier" },
+                "key": "id"
+            }
+        }
+    },
+
+	"mkt_automation_template/update/default": {
+        "layout": {
+            "cols" : { "content": { "class": "col-md-10" }, "scrollspy": { "class": "col-md-2" }},
+            "sections": {
+                "": {
+                    "properties": ["folder", "name"]
+                },
+                "email": {
+                    "labels": { "default": "Email" },
+                    "properties": ["email_subject", "email_body", "cc", "cci"]
+                },
+                "sms": {
+                    "labels": { "default": "SMS" },
+                    "properties": ["sms"]
+                }
+            }
+        },
+        "properties": {
+            "folder": {},
+            "name": { "mandatory": true },
+            "email_subject": {},
+            "email_body": {},
+            "cc": {},
+            "cci": {},
+            "sms": { "class": "col-md-12" },
+            "touched_at": { "consistency": true }
+        }
+    }
+}

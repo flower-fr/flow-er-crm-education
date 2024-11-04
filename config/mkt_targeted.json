@@ -3,7 +3,8 @@
         "entities": {
             "candidat": { "table": "candidat", "foreignKey": "candidat_id", "foreignEntity": "mkt_targeted" },
             "place": { "table": "place", "foreignKey": "place_id", "foreignEntity": "candidat" },
-            "contact_1": { "table": "vcard", "foreignKey": "contact_1_id", "foreignEntity": "candidat" }
+            "contact_1": { "table": "vcard", "foreignKey": "contact_1_id", "foreignEntity": "candidat" },
+            "mkt_automation_template": { "table": "mkt_automation_template", "foreignKey": "template_id", "foreignEntity": "mkt_targeted" }
         },
         "properties": {
             "id": { "entity": "mkt_targeted", "column": "id", "type": "primary" },
@@ -11,12 +12,22 @@
             "month": { "entity": "mkt_targeted", "column": "month" },
 
             "candidat_id": { "entity": "mkt_targeted", "column": "candidat_id", "type": "int" },
+            "template_id": { "entity": "mkt_targeted", "column": "template_id", "type": "int" },
+
             "status": { "entity": "mkt_targeted", "column": "status" },
             "target": { "entity": "mkt_targeted", "column": "target" },
             "sent_at": { "entity": "mkt_targeted", "column": "sent_at", "type": "datetime" },
             "email_subject": { "entity": "mkt_targeted", "column": "email_subject" },
-            "email_text": { "entity": "mkt_targeted", "column": "email_text", "type": "mediumtext" },
-            "sms_text": { "entity": "mkt_targeted", "column": "sms_text" },
+            "email_body": { "entity": "mkt_targeted", "column": "email_body", "type": "mediumtext" },
+            "cc": { "entity": "mkt_targeted", "column": "cc" },
+            "cci": { "entity": "mkt_targeted", "column": "cci" },
+            "sms": { "entity": "mkt_targeted", "column": "sms" },
+
+            "template_email_subject": { "entity": "mkt_automation_template", "column": "email_subject" },
+            "template_email_body": { "entity": "mkt_automation_template", "column": "email_body" },
+            "template_cc": { "entity": "mkt_automation_template", "column": "cc" },
+            "template_cci": { "entity": "mkt_automation_template", "column": "cci" },
+            "template_sms": { "entity": "mkt_automation_template", "column": "sms" },
 
             "school": { "entity": "candidat", "column": "school" },
             "place_id": { "entity": "candidat", "column": "place_id", "type": "int" },
@@ -56,6 +67,19 @@
 		}
     },
 
+    "mkt_targeted/property/template_id": {
+		"definition": "inline",
+		"type": "source",
+        "entity": "mkt_automation_template",
+        "where": "folder:automation/template",
+        "order": "name",
+        "format": ["%s", "name"],
+		"labels": {
+			"default": "Template",
+			"fr_FR": "Modèle"
+		}
+    },
+
     "mkt_targeted/property/target": {
 		"definition": "inline",
         "type": "input",
@@ -83,21 +107,33 @@
 		}
     },
 
-    "mkt_targeted/property/email_text": {
+    "mkt_targeted/property/email_body": {
 		"definition": "inline",
-        "type": "html",
+        "type": "textarea",
 		"labels": {
-			"default": "Email text",
-			"fr_FR": "Texte du mail"
+			"default": "Email body",
+			"fr_FR": "Corps du mail"
 		}
     },
+	
+    "mkt_targeted/property/cc": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Cc", "fr_FR": "Cc" }
+    },
+	
+    "mkt_targeted/property/cci": {
+        "definition": "inline",
+        "type": "input",
+        "labels": { "default": "Cci", "fr_FR": "Cci" }
+    },
 
-    "mkt_targeted/property/sms_text": {
+    "mkt_targeted/property/sms": {
 		"definition": "inline",
-        "type": "html",
+        "type": "input",
 		"labels": {
-			"default": "SMS text",
-			"fr_FR": "Texte du SMS"
+			"default": "SMS",
+			"fr_FR": "SMS"
 		}
     },
 
@@ -360,7 +396,7 @@
 	"mkt_targeted/update/default": {
         "layout": {
             "unique": {
-                "properties": ["target", "sent_at", "email_subject", "email_text", "sms_text"]
+                "properties": ["target", "sent_at", "email_subject", "email_body", "sms"]
             }
         },
         "properties": {
@@ -368,8 +404,8 @@
             "status": { "readonly": true },
             "sent_at": { "readonly": true },
             "email_subject": { "readonly": true },
-            "email_text": { "readonly": true },
-            "sms_text": { "readonly": true },
+            "email_body": { "readonly": true },
+            "sms": { "readonly": true },
             "school": { "readonly": true },
             "place_id": { "readonly": true },
             "school_year": { "readonly": true },
@@ -381,6 +417,46 @@
         }
     },
 
+    "mkt_targeted/groupTab/default": {
+        "layout": {
+            "sections": {
+                "": {
+                    "properties": { 
+                        "template_id": {}
+                    }
+                },
+                "message": {
+                    "properties": {
+                        "email_subject": {},
+                        "email_body": {},
+                        "cc": {},
+                        "cci": {},
+                        "sms": {}
+                    }
+                }
+            }
+        },
+        "properties": {
+            "template_id": {
+                "value": "?template_id",
+                "columns": {
+                    "name": "template_name", 
+                    "email_subject": "template_email_subject", 
+                    "email_body": "template_email_body", 
+                    "cc": "template_cc", 
+                    "cci": "template_cci", 
+                    "sms": "template_sms"
+                },
+                "change": "get"
+            },
+            "email_subject": { "value": "template_email_subject" },
+            "email_body": { "value": "template_email_body",  "class": "col-md-12" },
+            "cc": { "value": "template_cc" },
+            "cci": { "value": "template_cci" },
+            "sms": { "value": "template_sms",  "class": "col-md-12" }
+        }
+    },
+
     "mkt_targeted/export/default": { 
         "properties": { 
             "touched_at": {},
@@ -388,8 +464,8 @@
             "status": {},
             "sent_at": {},
             "email_subject": {},
-            "email_text": {},
-            "sms_text": {},
+            "email_body": {},
+            "sms": {},
             "school": {},
             "place_id": {},
             "school_year": {},
