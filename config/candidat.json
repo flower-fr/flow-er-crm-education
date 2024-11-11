@@ -936,6 +936,7 @@
 	
 	"candidat/list/marketing": { 
         "measure": "amount",
+        "checkData": ["id", "email", "n_first", "contact_1_id"],
         "properties": { 
             "status": {},
             "origine": {},

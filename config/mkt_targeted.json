@@ -109,7 +109,7 @@
 
     "mkt_targeted/property/email_body": {
 		"definition": "inline",
-        "type": "textarea",
+        "type": "wysiwyg",
 		"labels": {
 			"default": "Email body",
 			"fr_FR": "Corps du mail"
@@ -118,13 +118,13 @@
 	
     "mkt_targeted/property/cc": {
         "definition": "inline",
-        "type": "input",
+        "type": "email",
         "labels": { "default": "Cc", "fr_FR": "Cc" }
     },
 	
     "mkt_targeted/property/cci": {
         "definition": "inline",
-        "type": "input",
+        "type": "email",
         "labels": { "default": "Cci", "fr_FR": "Cci" }
     },
 
@@ -426,6 +426,40 @@
                     }
                 },
                 "message": {
+                    "properties": {
+                        "email_subject": {},
+                        "email_body": {},
+                        "cc": {},
+                        "cci": {},
+                        "sms": {}
+                    }
+                }
+            },
+            "posts": {
+                "send": {
+                    "controller": "core",
+                    "action": "v1",
+                    "steps": { 
+                        "registerSmtp": {},
+                        "sendSmtp": { "async": true }
+                    },
+                    "entity": "mkt_targeted",
+                    "labels": { "default": "Send", "fr_FR": "Envoyer" },
+                    "properties": {
+                        "template_id": {},
+                        "email_subject": {},
+                        "email_body": {},
+                        "cc": {},
+                        "cci": {},
+                        "sms": {}
+                    }
+                },
+                "save": {
+                    "controller": "core",
+                    "action": "v1",
+                    "steps": { "save": {} },
+                    "entity": "mkt_automation_template",
+                    "labels": { "default": "Save as template", "fr_FR": "Conserver comme modèle" },
                     "properties": {
                         "email_subject": {},
                         "email_body": {},
