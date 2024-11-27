@@ -1,6 +1,8 @@
 {
     "candidat/model": {
         "entities": {
+            "history": { "table": "edu_contact" },
+            "candidat": { "table": "candidat", "foreignKey": "candidat_id", "foreignEntity": "history" },
             "place": { "table": "place", "foreignKey": "place_id", "foreignEntity": "candidat" },
             "contact_1": { "table": "vcard", "foreignKey": "contact_1_id", "foreignEntity": "candidat" },
             "contact_2": { "table": "vcard", "foreignKey": "contact_2_id", "foreignEntity": "candidat" },
@@ -74,6 +76,10 @@
             "transfer_order_date": { "entity": "candidat", "column": "transfer_order_date", "type": "date" },
             "bank_identifier": { "entity": "candidat", "column": "bank_identifier" },
 
+            "chanel": { "entity": "history", "column": "chanel" },
+            "direction": { "entity": "history", "column": "direction" },
+            "text": { "entity": "history", "column": "text", "max_length": 65535 },
+
             "visibility": { "entity": "candidat", "column": "visibility", "audit": true },
             "touched_at": { "entity": "candidat", "column": "touched_at", "type": "datetime" },
             "touched_by": { "entity": "candidat", "column": "touched_by", "type": "int" }
@@ -100,13 +106,13 @@
         "definition": "inline",
         "type": "select",
         "modalities": {
-            "new": { "default": "À contacter" },
-            "repondeur": { "default": "Répondeur" },
-            "a_relancer": { "default": "À relancer" },
-            "candidate": { "default": "Qualifié (Candidat)" },
-            "non_qualifie": { "default": "Non qualifié" },
-            "ne_plus_contacter": { "default": "Ne plus contacter" },
-            "black_liste": { "default": "Black listé" },
+            "new": { "default": "Contact", "fr_FR": "À contacter" },
+            "called": { "default": "Called", "fr_FR": "Appelé" },
+            "callback": { "default": "Callback", "fr_FR": "À relancer" },
+            "candidate": { "default": "candidate", "fr_FR": "Candidat" },
+            "gone": { "default": "Parti" },
+            "opted_out": { "default": "Ne plus contacter" },
+            "blacklisted": { "default": "Blacklisted", "fr_FR": "Black listé" },
 
             "nouvelle_candidature": { "default": "Nouvelle candidature" },
             "entretien_programme": { "default": "Entretien d'admission programmé" },
@@ -738,7 +744,43 @@
         }
     },
 
+    "candidat/property/chanel": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "form": { "default": "Form", "fr_FR": "Formulaire" },
+            "email": { "default": "Email", "fr_FR": "Email" },
+            "sms": { "default": "SMS", "fr_FR": "SMS" },
+            "phone": { "default": "Phone", "fr_FR": "Téléphone" },
+            "bo": { "default": "Back-office", "fr_FR": "Back-office" }
+        },
+        "labels": {
+            "default": "Texte"
+        }
+    },
+
+    "candidat/property/direction": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "outbound": { "default": "Outbound", "fr_FR": "Sortant" },
+            "inbound": { "default": "Inbound", "fr_FR": "Entrant" }
+        },
+        "labels": {
+            "default": "Texte"
+        }
+    },
+
+    "candidat/property/text": {
+        "definition": "inline",
+        "type": "textarea",
+        "labels": {
+            "default": "Texte"
+        }
+    },
+
     "candidat/property/contacts": {
+        "comment": "DEPRECATED",
 		"definition": "inline",
 		"type": "history",
         "entity": "contact",
