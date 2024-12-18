@@ -45,7 +45,8 @@
             "bo": { "default": "Back-office", "fr_FR": "Back-office" }
         },
         "labels": {
-            "default": "Texte"
+            "default": "Channel",
+            "fr_FR": "Canal"
         }
     },
 

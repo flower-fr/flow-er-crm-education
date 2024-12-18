@@ -755,7 +755,8 @@
             "bo": { "default": "Back-office", "fr_FR": "Back-office" }
         },
         "labels": {
-            "default": "Texte"
+            "default": "Channel",
+            "fr_FR": "Canal"
         }
     },
 
@@ -962,7 +963,7 @@
         "properties": { 
             "status": {},
             "school": {},
-            "place_id": {},
+            "place_name": {},
             "school_year": { },
             "level": {},
             "owner_n_fn": {},
@@ -1021,6 +1022,12 @@
 
     "candidat/detail/default": {
         "tabs": {
+            "contacts": {
+                "definition": "inline",
+                "route": "/bo/modalList/edu_contact",
+                "labels": {"en_US": "Contacts history", "fr_FR": "Historique des contacts"},
+                "renderer": "renderModalCalendar"
+            },
             "contact_1": {
                 "definition": "inline",
                 "route": "/bo/update/candidat",
@@ -1328,6 +1335,58 @@
         "update": {
             "callback_date": "today+2",
             "contact_history": { "default": "Email + SMS auto \"Candidat\"" }
+        }
+    },
+
+    "candidat/import/default": {
+        "identifier": ["email", "n_first"],
+        "properties": {
+            "n_title": { "update": true },
+        	"n_last": { "update": true },
+        	"n_first": { "update": true },
+        	"email": { "update": true },
+        	"tel_cell": { "update": true },
+        	"school": { "update": true },
+        	"school_year": { "update": true },
+        	"nationality": { "update": true }
+        },
+        "mapping": {
+            "titre": { 
+                "type": "select",
+                "propertyId": "n_title",
+                "modalities": { 
+                    "m": "1",
+                    "mme": "2"
+                }
+            },
+        	"nom": { "type": "text", "propertyId": "n_last" },
+        	"prénom": { "type": "text", "propertyId": "n_first" },
+        	"email": { "type": "text", "propertyId": "email" },
+        	"téléphone": { "type": "text", "propertyId": "tel_cell" },
+        	"école": { 
+                "type": "select", 
+                "propertyId": "school",
+                "modalities": { 
+                    "btsmco": "bts_mco",
+                    "btsndrc": "bts_ndrc"
+                }
+            },
+        	"année": { 
+                "type": "select", 
+                "propertyId": "school_year",
+                "modalities": { 
+                    "2025": "2025-2026",
+                    "2026": "2026-2027"
+                }
+            },
+        	"nationalité": { 
+                "type": "select", 
+                "propertyId": "nationality",
+                "modalities": { 
+                    "française": "1",
+                    "ue": "2"
+                }
+            }
         }
     }
 }
