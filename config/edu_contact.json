@@ -1,6 +1,7 @@
 {
     "edu_contact/model": {
         "entities": {
+            "edu_contact": { "table": "edu_contact" },
             "candidat": { "table": "candidat", "foreignKey": "candidat_id", "foreignEntity": "edu_contact" },
             "place": { "table": "place", "foreignKey": "place_id", "foreignEntity": "candidat" },
             "contact_1": { "table": "vcard", "foreignKey": "contact_1_id", "foreignEntity": "candidat" },
@@ -260,6 +261,60 @@
             "user_n_fn": {}, 
             "email": {},
             "tel_cell": {}
+        }
+    },
+
+    "edu_contact/detailTab/default": {
+        "controller": "flBo",
+        "action": "detailTab",
+        "entity": "edu_contact",
+        "layout": {
+            "sections": {
+                "list": {
+                    "condition": "!id",
+                    "entity": "edu_contact",
+                    "properties": ["candidat_id", "status", "direction", "callback_date", "touched_at", "chanel", "text"],
+                    "renderer": "renderModalList",
+                    "disposition": "descending",
+                    "search": [
+                        { "type": "datemin", "property": "touched_at" },
+                        { "type": "datemax", "property": "touched_at" }
+                    ],
+                    "updatable": false
+                }
+            },
+            "posts": {
+                "add": {
+                    "controller": "bo",
+                    "action": "v1",
+                    "entity": "edu_contact",
+                    "labels": { "default": "Add", "fr_FR": "Ajouter" }
+                }        
+            }
+        },
+        "data": {
+            "edu_contact": { 
+                "where": {
+                    "candidat_id": "candidat_id"
+                },
+                "properties": {
+                    "candidat_id": { "type": "hidden" },
+                    "status": { "type": "hidden", "value": "new" },
+                    "direction": { "type": "hidden", "value": "inbound" },
+                    "callback_date": { "type": "hidden", "value": "today" },
+                    "touched_at": { "value": "today", "disabled": true, "anchor": true },
+                    "chanel": { "required": true, "anchor": true },
+                    "text": { "required": true }
+                }
+            }
+        },
+        "properties": {
+            "status": { "type": "hidden", "value": "new" },
+            "direction": { "type": "hidden", "value": "inbound" },
+            "callback_date": { "type": "hidden", "value": "today" },
+            "touched_at": { "value": "today", "disabled": true, "anchor": true },
+            "chanel": { "required": true, "anchor": true },
+            "text": { "required": true }
         }
     }
 }

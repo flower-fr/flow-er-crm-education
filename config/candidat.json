@@ -1024,15 +1024,28 @@
         "tabs": {
             "contacts": {
                 "definition": "inline",
-                "route": "/bo/modalList/edu_contact",
-                "labels": {"en_US": "Contacts history", "fr_FR": "Historique des contacts"},
-                "renderer": "renderModalCalendar"
+                "controller": "flBo",
+                "action": "detailTab",
+                "entity": "edu_contact",
+                "id": 0,
+                "query": {
+                    "where": { "candidat_id": "id" },
+                    "order": "-touched_at"
+                },
+                "labels": {"en_US": "Contacts", "fr_FR": "Historique des contacts"},
+                "renderer": "renderDetailTab"
             },
             "contact_1": {
                 "definition": "inline",
-                "route": "/bo/update/candidat",
-                "labels": {"en_US": "Update", "fr_FR": "Modifier"},
-                "key": "id"
+                "controller": "flBo",
+                "action": "detailTab",
+                "entity": "candidat",
+                "id": "id",
+                "query": {
+                    "where": { "id": "id" }
+                },
+                "labels": {"en_US": "Learner file", "fr_FR": "Fiche apprenant"},
+                "renderer": "renderDetailTab"
             },
             "add": {
                 "definition": "inline",
@@ -1040,6 +1053,88 @@
                 "labels": {"en_US": "Add", "fr_FR": "Ajouter"},
                 "key": false
             }
+        }
+    },
+
+    "candidat/detailTab/default": {
+        "controller": "flBo",
+        "action": "detailTab",
+        "entity": "candidat",
+        "layout": {
+            "cols" : { "content": { "class": "col-md-10" }, "scrollspy": { "class": "col-md-2" }},
+            "sections": {
+                "intro": {
+                    "condition": "id",
+                    "entity": "candidat",
+                    "properties": ["id", "contact_1_id", "school", "place_id", "level", "status", "next_meeting_date", "next_meeting_time", "opening_date", "callback_date", "origine"],
+                    "renderer": "renderUpdate"
+                },
+                "personal_data": {
+                    "condition": "id",
+                    "entity": "candidat",
+                    "properties": ["n_first", "n_last", "gender", "email", "tel_cell"],
+                    "labels": { "default": "Personal data", "fr_FR": "Données personnelles" },
+                    "renderer": "renderUpdate"
+                }
+            },
+            "posts": {
+                "add": {
+                    "condition": "id",
+                    "controller": "bo",
+                    "action": "v1",
+                    "entity": "candidat",
+                    "labels": { "default": "Update", "fr_FR": "Modifier" }
+                }
+            }
+        },
+        "data": {
+            "candidat": { 
+                "where": {
+                    "id": "id"
+                },
+                "properties": {
+                    "id": { "type": "hidden" },
+                    "contact_1_id": { "type": "hidden" },
+                    "n_first": { "mandatory": true },
+                    "n_last": { "mandatory": true },
+                    "gender": {},
+                    "email": { "mandatory": true },
+                    "tel_cell": { "mandatory": true },
+                    "school": { "mandatory": true },
+                    "next_meeting_date": {},
+                    "next_meeting_time": {},
+                    "place_id": { "mandatory": true },
+                    "level": { "mandatory": true },
+                    "contact_agreement": { "readonly": true },
+                    "status": { "mandatory": true },
+                    "school_year": { "mandatory": true },
+                    "opening_date": { "readonly": true },
+                    "callback_date": { "mandatory": true },
+                    "origine": { "readonly": true },
+                    "touched_at": { "consistency": true },
+                    "contacts": {}
+                }
+            }
+        },
+        "properties": {
+            "n_first": { "mandatory": true },
+            "n_last": { "mandatory": true },
+            "gender": {},
+            "email": { "mandatory": true },
+            "tel_cell": { "mandatory": true },
+            "school": { "mandatory": true },
+            "next_meeting_date": {},
+            "next_meeting_time": {},
+            "place_id": { "mandatory": true },
+            "level": { "mandatory": true },
+            "contact_agreement": { "readonly": true },
+            "status": { "mandatory": true },
+            "school_year": { "mandatory": true },
+            "opening_date": { "readonly": true },
+            "callback_date": { "mandatory": true },
+            "origine": { "readonly": true },
+            "touched_at": { "consistency": true },
+            "contacts": {}
         }
     },
 
