@@ -1,6 +1,7 @@
 {
     "mkt_automation_template/model": {
         "entities": {
+            "mkt_automation_template": { "table": "mkt_automation_template" }
         },
         "properties": {
             "id": { "entity": "mkt_automation_template", "column": "id", "type": "primary" },

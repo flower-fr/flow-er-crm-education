@@ -436,7 +436,7 @@
                 }
             },
             "posts": {
-                "send": {
+                "sendEmail": {
                     "controller": "core",
                     "action": "v1",
                     "steps": { 
@@ -444,7 +444,7 @@
                         "sendSmtp": { "async": true }
                     },
                     "entity": "mkt_targeted",
-                    "labels": { "default": "Send", "fr_FR": "Envoyer" },
+                    "labels": { "default": "Send emails", "fr_FR": "Envoyer les emails" },
                     "properties": {
                         "template_id": {},
                         "email_subject": {},
@@ -454,11 +454,26 @@
                         "sms": {}
                     }
                 },
+                "sendSms": {
+                    "controller": "core",
+                    "action": "v1",
+                    "steps": { 
+                        "registerSms": {},
+                        "sendSms": { "async": true }
+                    },
+                    "entity": "mkt_targeted",
+                    "labels": { "default": "Send SMS", "fr_FR": "Envoyer les SMS" },
+                    "properties": {
+                        "template_id": {},
+                        "sms": {}
+                    }
+                },
                 "save": {
                     "controller": "core",
                     "action": "v1",
                     "steps": { "save": {} },
                     "entity": "mkt_automation_template",
+                    "id": "?template_id",
                     "labels": { "default": "Save as template", "fr_FR": "Conserver comme modèle" },
                     "properties": {
                         "email_subject": {},
@@ -487,7 +502,7 @@
             "email_body": { "value": "template_email_body",  "class": "col-md-12" },
             "cc": { "value": "template_cc" },
             "cci": { "value": "template_cci" },
-            "sms": { "value": "template_sms",  "class": "col-md-12" }
+            "sms": { "type": "sms", "value": "template_sms",  "class": "col-md-12" }
         }
     },
 
