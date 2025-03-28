@@ -1,16 +1,17 @@
 {
     "profile/model": {
         "entities": {
-            "user": { "table": "user", "foreignKey": "user_id", "foreignEntity": "profile" }
+            "profile": { "table": "profile" }
         },
         "properties": {
             "id": { "entity": "profile", "column": "id", "type": "primary" },
             "n_first": { "entity": "profile", "column": "n_first" },
             "n_last": { "entity": "profile", "column": "n_last" },
             "n_fn": { "entity": "profile", "column": "n_fn", "type": "CONCAT", "components": ["n_last", " ", "n_first"] },
-            "email": { "entity": "user", "column": "email" },
+            "email": { "entity": "profile", "column": "email" },
             "equipe": { "entity": "profile", "column": "equipe" },
             "role": { "entity": "profile", "column": "role" },
+            "user_id": { "entity": "profile", "column": "user_id", "type": "int" },
 
             "visibility": { "entity": "profile", "column": "visibility", "audit": true },
             "touched_at": { "entity": "profile", "column": "touched_at", "type": "datetime" },
